@@ -53,7 +53,7 @@ namespace MediiProgramareEntity.Controllers
         // POST: Studio/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudioId,Name,Movies,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
+        public async Task<IActionResult> Create([Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace MediiProgramareEntity.Controllers
         // POST: Studio/Edit/{Id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudioId,Name,Movies,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
+        public async Task<IActionResult> Edit(int id, [Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
         {
             if (id != studioModel.StudioId)
             {
