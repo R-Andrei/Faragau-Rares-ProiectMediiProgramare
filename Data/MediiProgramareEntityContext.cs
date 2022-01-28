@@ -50,33 +50,5 @@ namespace MediiProgramareEntity.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
         }
-
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-
-        //    modelBuilder.Entity<GenreModel>()
-        //        .HasOne<MovieModel>(g => g.Movie)
-        //        .WithOne(m => m.Genre)
-        //        .HasForeignKey<MovieModel>(m => m.GenreId);
-
-        //    modelBuilder.Entity<StudioModel>()
-        //        .HasOne<MovieModel>(s => s.Movie)
-        //        .WithOne(m => m.Studio)
-        //        .HasForeignKey<MovieModel>(m => m.StudioId);
-
-
-        //    modelBuilder.Entity<MovieModel>()
-        //        .HasOne<GenreModel>(m => m.Genre)
-        //        .WithOne(g => g.Movie)
-        //        .HasForeignKey<MovieModel>(m => m.GenreId);
-
-        //    modelBuilder.Entity<MovieModel>()
-        //        .HasOne<StudioModel>(m => m.Studio)
-        //        .WithOne(g => g.Movie)
-        //        .HasForeignKey<MovieModel>(m => m.StudioId);
-
-
-        //}
     }
 }

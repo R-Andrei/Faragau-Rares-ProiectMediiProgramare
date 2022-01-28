@@ -23,7 +23,7 @@ namespace MediiProgramareEntity.Controllers
         // GET: Movie
         public async Task<IActionResult> Index()
         {
-            var mediiProgramareEntityContext = _context.MovieModel.Include(m => m.Genre).Include(m => m.Studio);
+            var mediiProgramareEntityContext = _context.MovieModel.Include(m => m.Genre).Include(m => m.Studio);  
             return View(await mediiProgramareEntityContext.ToListAsync());
         }
 
@@ -75,9 +75,8 @@ namespace MediiProgramareEntity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MovieId,Name,Rank,Peak,WorldBoxOffice,Year,GenreId,StudioId")] MovieModel movieModel)
         {
-            
             if (ModelState.IsValid)
-            {
+            { 
                 MovieModel last = _context.MovieModel.OrderByDescending(m => m.MovieId).FirstOrDefault();
 
                 _context.Entry(movieModel.Genre).State = EntityState.Unchanged;
