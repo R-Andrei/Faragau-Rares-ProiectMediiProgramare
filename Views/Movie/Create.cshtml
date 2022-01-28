@@ -39,12 +39,14 @@
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GenreId" class="control-label"></label>
+                <label asp-for="Genre" class="control-label"></label>
                 <select asp-for="GenreId" class ="form-control" asp-items="ViewBag.GenreId"></select>
+                <span asp-validation-for="GenreId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudioId" class="control-label"></label>
+                <label asp-for="Studio" class="control-label"></label>
                 <select asp-for="StudioId" class ="form-control" asp-items="ViewBag.StudioId"></select>
+                <span asp-validation-for="StudioId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

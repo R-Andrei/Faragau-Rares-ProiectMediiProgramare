@@ -47,11 +47,26 @@ namespace MediiProgramareEntity.Controllers
             return View(movieModel);
         }
 
+        private void PopulateGenresList(object selectedGenre = null)
+        {
+            var genreQuery = from g in _context.GenreModel
+                                   orderby g.Name
+                                   select g;
+            ViewBag.GenreId = new SelectList(genreQuery.AsNoTracking(), "GenreId", "Name", selectedGenre);
+        }
+        private void PopulateStudiosList(object selectedStudio = null)
+        {
+            var studioQuery = from s in _context.StudioModel
+                             orderby s.Name
+                             select s;
+            ViewBag.StudioId = new SelectList(studioQuery.AsNoTracking(), "StudioId", "Name", selectedStudio);
+        }
+
         // GET: Movie/Create
         public IActionResult Create()
         {
-            ViewData["GenreId"] = new SelectList(_context.GenreModel, "GenreId", "GenreId");
-            ViewData["StudioId"] = new SelectList(_context.StudioModel, "StudioId", "StudioId");
+            PopulateGenresList();
+            PopulateStudiosList();
             return View();
         }
 
@@ -68,15 +83,17 @@ namespace MediiProgramareEntity.Controllers
                 _context.Entry(movieModel.Genre).State = EntityState.Unchanged;
                 _context.Entry(movieModel.Studio).State = EntityState.Unchanged;
 
+                movieModel.MovieId = last.MovieId + 1;
+
                 movieModel.Genre = null;
                 movieModel.Studio = null;
-                movieModel.MovieId = last.MovieId + 1;
+
                 _context.Add(movieModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.GenreModel, "GenreId", "GenreId", movieModel.GenreId);
-            ViewData["StudioId"] = new SelectList(_context.StudioModel, "StudioId", "StudioId", movieModel.StudioId);
+            PopulateGenresList(movieModel.GenreId);
+            PopulateStudiosList(movieModel.StudioId);
             return View(movieModel);
         }
 
@@ -93,8 +110,8 @@ namespace MediiProgramareEntity.Controllers
             {
                 return NotFound();
             }
-            ViewData["GenreId"] = new SelectList(_context.GenreModel, "GenreId", "GenreId", movieModel.GenreId);
-            ViewData["StudioId"] = new SelectList(_context.StudioModel, "StudioId", "StudioId", movieModel.StudioId);
+            PopulateGenresList();
+            PopulateStudiosList();
             return View(movieModel);
         }
 
@@ -133,8 +150,8 @@ namespace MediiProgramareEntity.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.GenreModel, "GenreId", "GenreId", movieModel.GenreId);
-            ViewData["StudioId"] = new SelectList(_context.StudioModel, "StudioId", "StudioId", movieModel.StudioId);
+            PopulateGenresList(movieModel.GenreId);
+            PopulateStudiosList(movieModel.StudioId);
             return View(movieModel);
         }
 
