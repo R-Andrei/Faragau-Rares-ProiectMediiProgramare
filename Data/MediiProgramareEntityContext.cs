@@ -21,6 +21,7 @@ namespace MediiProgramareEntity.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Identity insert on
             modelBuilder.Entity<GenreModel>()
                 .Property(g => g.GenreId)
                 .ValueGeneratedNever();
@@ -39,6 +40,8 @@ namespace MediiProgramareEntity.Data
             modelBuilder.Entity<MovieModel>()
                 .HasKey(m => m.MovieId);
 
+
+            // One-to-Many relations
             modelBuilder.Entity<MovieModel>()
                 .HasOne(m => m.Genre)
                 .WithMany(g => g.Movies)

@@ -51,9 +51,8 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Studio/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
+        [HttpPost, ActionName("Create")]
+        public async Task<IActionResult> CreateConfirmed([Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +85,8 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Studio/Edit/{Id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
+        [HttpPost, ActionName("Edit")]
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("StudioId,Name,MoviesCreated,HomeBoxOffice,WorldBoxOffice")] StudioModel studioModel)
         {
             if (id != studioModel.StudioId)
             {
@@ -138,7 +136,6 @@ namespace MediiProgramareEntity.Controllers
 
         // POST: Studio/Delete/{Id}
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var studioModel = await _context.StudioModel.FindAsync(id);

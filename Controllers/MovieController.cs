@@ -71,19 +71,20 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Movie/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,Name,Rank,Peak,WorldBoxOffice,Year,GenreId,StudioId")] MovieModel movieModel)
+        [HttpPost, ActionName("Create")]
+        public async Task<IActionResult> CreateConfirmed([Bind("MovieId,Name,Rank,Peak,WorldBoxOffice,Year,GenreId,StudioId")] MovieModel movieModel)
         {
             if (ModelState.IsValid)
             { 
                 MovieModel last = _context.MovieModel.OrderByDescending(m => m.MovieId).FirstOrDefault();
+                movieModel.MovieId = last.MovieId + 1;
 
+                // Do not track changes
                 _context.Entry(movieModel.Genre).State = EntityState.Unchanged;
                 _context.Entry(movieModel.Studio).State = EntityState.Unchanged;
 
-                movieModel.MovieId = last.MovieId + 1;
-
+                // Set related objects to null
+                // so EF doesn't try to insert records in tables
                 movieModel.Genre = null;
                 movieModel.Studio = null;
 
@@ -115,9 +116,8 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Movie/Edit/{Id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Name,Rank,Peak,WorldBoxOffice,Year,GenreId,StudioId")] MovieModel movieModel)
+        [HttpPost, ActionName("Edit")]
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("MovieId,Name,Rank,Peak,WorldBoxOffice,Year,GenreId,StudioId")] MovieModel movieModel)
         {
             if (id != movieModel.MovieId)
             {
@@ -128,11 +128,15 @@ namespace MediiProgramareEntity.Controllers
             {
                 try
                 {
+                    // Do not track changes
                     _context.Entry(movieModel.Genre).State = EntityState.Unchanged;
                     _context.Entry(movieModel.Studio).State = EntityState.Unchanged;
 
+                    // Set related objects to null
+                    // so EF doesn't try to insert records in tables
                     movieModel.Genre = null;
                     movieModel.Studio = null;
+
                     _context.Update(movieModel);
                     await _context.SaveChangesAsync();
                 }
@@ -176,7 +180,6 @@ namespace MediiProgramareEntity.Controllers
 
         // POST: Movie/Delete/{Id}
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movieModel = await _context.MovieModel.FindAsync(id);

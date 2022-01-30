@@ -14,7 +14,7 @@ namespace MediiProgramareEntity.Models
         public int Peak { get; set; }
         public Int64 WorldBoxOffice { get; set; }
         public int Year { get; set; }
-
+        
         public int GenreId { get; set; }
         public GenreModel Genre { get; set; }
 

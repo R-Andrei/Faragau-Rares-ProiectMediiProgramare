@@ -8,7 +8,6 @@ namespace MediiProgramareEntity.Models
     [Table("Genres")]
     public class GenreModel
     {
-
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public int GenreId { get; set; }
@@ -23,8 +22,7 @@ namespace MediiProgramareEntity.Models
             Name = string.Empty;
             Description = string.Empty;
         }
-        public GenreModel(int id, string name, string description
-            )
+        public GenreModel(int id, string name, string description)
         {
             GenreId = id;
             Name = name;

@@ -26,9 +26,7 @@ namespace MediiProgramareEntity.Models
             HomeBoxOffice = 0;
             WorldBoxOffice = 0;
         }
-        public StudioModel(
-            int id, string name, int movies, long homeBoxOffice, long worldBoxOffice
-            )
+        public StudioModel(int id, string name, int movies, long homeBoxOffice, long worldBoxOffice)
         {
             StudioId = id;
             Name = name;

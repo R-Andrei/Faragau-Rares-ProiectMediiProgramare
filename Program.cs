@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MediiProgramareEntity.Data;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MediiProgramareEntityContext>(options =>
@@ -21,9 +24,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

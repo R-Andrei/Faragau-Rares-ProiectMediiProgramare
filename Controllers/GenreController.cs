@@ -51,9 +51,8 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Genre/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GenreId,Name,Description")] GenreModel genreModel)
+        [HttpPost, ActionName("Create")]
+        public async Task<IActionResult> CreateConfirmed([Bind("GenreId,Name,Description")] GenreModel genreModel)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +84,8 @@ namespace MediiProgramareEntity.Controllers
         }
 
         // POST: Genre/Edit/{Id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GenreId,Name,Description")] GenreModel genreModel)
+        [HttpPost, ActionName("Edit")]
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("GenreId,Name,Description")] GenreModel genreModel)
         {
             if (id != genreModel.GenreId)
             {
@@ -137,7 +135,6 @@ namespace MediiProgramareEntity.Controllers
 
         // POST: Genre/Delete/{Id}
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var genreModel = await _context.GenreModel.FindAsync(id);
